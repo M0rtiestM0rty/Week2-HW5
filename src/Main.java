@@ -1,15 +1,53 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.util.Arrays;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
-    }
-}
+public class Main
+{
+    public static void quickSort(char[] arr, int low, int high)
+    {
+        if (low < high)
+        {
+            int partitionIndex = partition(arr, low, high);
+            quickSort(arr, low, partitionIndex - 1);
+            quickSort(arr, partitionIndex + 1, high);
+        }// if statement
+    }//end quickSort Method
+
+
+    public static int partition(char[] arr, int low, int high)
+    {
+        char pivot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++)
+        {
+            if (arr[j] <= pivot)
+            {
+                i++;
+                swap(arr, i, j);
+            }// end if
+        }// end for loop
+
+        swap(arr, i + 1, high);
+        return i + 1;
+    }// end partition
+
+
+    public static void swap(char[] arr, int i, int j)
+    {
+        char temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }// end swap
+
+
+    public static void main(String[] args)
+    {
+        char[] letters = {'Q', 'U', 'I', 'C', 'K', 'S', 'O', 'R', 'T'};
+
+        System.out.println("Before Sorting: " + Arrays.toString(letters));
+
+        quickSort(letters, 0, letters.length - 1);
+
+        System.out.println("After Sorting: " + Arrays.toString(letters));
+    }// end main
+}// end main class
